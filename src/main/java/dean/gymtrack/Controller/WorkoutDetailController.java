@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Log
@@ -34,6 +35,11 @@ public class WorkoutDetailController {
         log.info("id get from database is two : " + test.getWorkoutDetailId());
 
         return new ResponseEntity<>(jpaWorkoutDetailRepository.getReferenceById(id), HttpStatus.OK) ;
+    }
+
+    @GetMapping("/getall")
+    public ResponseEntity<List<WorkoutDetail>> getWorkoutDetailById(){
+        return new ResponseEntity<>(jpaWorkoutDetailRepository.findAll(),HttpStatus.OK);
     }
 
     @PostMapping(path="/put-workout",consumes = "application/json")

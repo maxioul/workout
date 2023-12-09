@@ -1,26 +1,26 @@
+// App.tsx or another file
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import TrainingDataCard from 'atom/TrainingDataCard';
+import { TrainingData } from 'entity/TrainingData';
+import TrainingDataDisplay from 'molecules/TrainingDataDisplay'
 
-function App() {
+const App: React.FC = () => {
+  const trainingData = new TrainingData(
+    "001",
+    "Bench Press",
+    "2023-11-30T23:00:00.000+00:00",
+    3,
+    10,
+    150,
+    "Felt bad, steady progress"
+  );
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Workout Detail</h1>
+      <TrainingDataDisplay />
     </div>
   );
-}
+};
 
 export default App;
