@@ -37,6 +37,14 @@ public class WorkoutDetailController {
         return new ResponseEntity<>(jpaWorkoutDetailRepository.getReferenceById(id), HttpStatus.OK) ;
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteWorkoutDetailById(@PathVariable("id") String id){
+        log.info("id is " + id);
+        log.info("id get from database is " + jpaWorkoutDetailRepository.getReferenceById(id));
+        jpaWorkoutDetailRepository.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK) ;
+    }
+
     @GetMapping("/getall")
     public ResponseEntity<List<WorkoutDetail>> getWorkoutDetailById(){
         return new ResponseEntity<>(jpaWorkoutDetailRepository.findAll(),HttpStatus.OK);

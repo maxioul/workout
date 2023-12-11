@@ -13,10 +13,20 @@ const TrainingDataDisplay: React.FC = () => {
       .catch(error => console.error('Error fetching data:', error));
   }, []);
 
+    const handleDelete = (workoutDetailId: string) => {
+      // Make an API call to delete the workout
+      fetch(`http://localhost:8080/workout-detail/${workoutDetailId}`, { method: 'DELETE' })
+        .then(() => {
+          // Update the state to remove the deleted workout
+          setTrainingData(trainingData.filter(workout => workout.workoutDetailId !== workoutDetailId));
+        })
+        .catch(error => console.error('Error:', error));
+    };
+
   return (
     <div>
-      {trainingData.map((data, index) => (
-        <TrainingDataCard key={index} data={data} />
+      {trainingData.map(trainingData => (
+        <TrainingDataCard key={trainingData.workoutDetailId} data={trainingData} onDelete={handleDelete} />
       ))}
     </div>
   );

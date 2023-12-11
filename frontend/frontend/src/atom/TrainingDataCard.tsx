@@ -4,9 +4,15 @@ import { TrainingData } from 'entity/TrainingData'; // Adjust the import path as
 
 interface TrainingDataCardProps {
   data: TrainingData;
+  onDelete: (id: string) => void;
 }
 
-const TrainingDataCard: React.FC<TrainingDataCardProps> = ({ data }) => {
+const TrainingDataCard: React.FC<TrainingDataCardProps> = ({ data , onDelete }) => {
+  const handleDelete = () => {
+    onDelete(data.workoutDetailId);
+  };
+
+
   return (
     <div style={cardStyle}>
       <span>{data.exerciseName}</span>
@@ -20,6 +26,7 @@ const TrainingDataCard: React.FC<TrainingDataCardProps> = ({ data }) => {
       <span>Weight: {data.weight} lbs</span>
       {' | '}
       <span>Notes: {data.notes}</span>
+       <button onClick={handleDelete}>Delete</button>
     </div>
   );
 };
