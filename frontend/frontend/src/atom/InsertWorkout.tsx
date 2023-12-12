@@ -35,13 +35,7 @@ const InsertWorkout: React.FC = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            name="workoutDetailId"
-            value={workoutDetail.workoutDetailId}
-            onChange={handleChange}
-            placeholder="workoutDetailId"
-          />
+
       <input
         type="text"
         name="exerciseName"

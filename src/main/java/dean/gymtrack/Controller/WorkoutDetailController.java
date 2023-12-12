@@ -3,26 +3,25 @@ package dean.gymtrack.Controller;
 
 import dean.gymtrack.Entity.WorkoutDetail;
 import dean.gymtrack.Repository.JpaWorkoutDetailRepository;
-import lombok.Data;
+import dean.gymtrack.service.TrainingIdGenerator;
 import lombok.extern.java.Log;
-import lombok.extern.log4j.Log4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.logging.Logger;
 
 @Log
 @RestController()
 @RequestMapping(path="/workout-detail" , produces="application/json")
 public class WorkoutDetailController {
 
-    private JpaWorkoutDetailRepository jpaWorkoutDetailRepository;
+    private final JpaWorkoutDetailRepository jpaWorkoutDetailRepository;
+    private final TrainingIdGenerator trainingIdGenerator;
 
-    public WorkoutDetailController(JpaWorkoutDetailRepository jpaWorkoutDetailRepository){
+    public WorkoutDetailController(JpaWorkoutDetailRepository jpaWorkoutDetailRepository, TrainingIdGenerator trainingIdGenerator){
         this.jpaWorkoutDetailRepository =jpaWorkoutDetailRepository;
+        this.trainingIdGenerator = trainingIdGenerator;
     }
 
     @GetMapping("/{id}")
@@ -53,6 +52,7 @@ public class WorkoutDetailController {
     @PostMapping(path="/put-workout",consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public WorkoutDetail postWorkoutDetail(@RequestBody WorkoutDetail workoutDetail){
+        workoutDetail.setWorkoutDetailId(trainingIdGenerator.generateId());
         return jpaWorkoutDetailRepository.save(workoutDetail);
     }
 
