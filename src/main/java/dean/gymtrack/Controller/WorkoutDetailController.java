@@ -5,6 +5,8 @@ import dean.gymtrack.Entity.WorkoutDetail;
 import dean.gymtrack.Repository.JpaWorkoutDetailRepository;
 import dean.gymtrack.service.TrainingIdGenerator;
 import lombok.extern.java.Log;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -56,4 +58,10 @@ public class WorkoutDetailController {
         return jpaWorkoutDetailRepository.save(workoutDetail);
     }
 
+
+    @GetMapping("/get-by-page")
+    public ResponseEntity<Page<WorkoutDetail>> getWorkoutDetailByPage(@RequestParam(defaultValue = "0") int page,
+                                                                      @RequestParam(defaultValue = "10") int size) {
+        return new ResponseEntity<>(jpaWorkoutDetailRepository.findAll(PageRequest.of(page, size)), HttpStatus.OK);
+    }
 }

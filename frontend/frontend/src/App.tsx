@@ -4,6 +4,7 @@ import TrainingDataCard from 'atom/TrainingDataCard';
 import { TrainingData } from 'entity/TrainingData';
 import TrainingDataDisplay from 'molecules/TrainingDataDisplay'
 import InsertWorkout from 'atom/InsertWorkout';
+import TrainingDataDisplayByPage from 'molecules/TrainingDataDisplayByPage'
 
 const App: React.FC = () => {
   const trainingData = new TrainingData(
@@ -20,7 +21,8 @@ const App: React.FC = () => {
     <div>
       <h1>Workout Detail</h1>
       <InsertWorkout />
-      <TrainingDataDisplay />
+{/*       <TrainingDataDisplay /> */}
+      <TrainingDataDisplayByPage />
     </div>
   );
 };
