@@ -43,8 +43,7 @@ const InsertWorkout: React.FC = () => {
         onChange={handleChange}
         placeholder="Exercise Name"
       />
-      {/* Workout Date */}
-//
+
       <input
         type="date"
         name="workoutDate"
