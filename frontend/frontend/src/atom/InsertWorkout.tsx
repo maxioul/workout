@@ -1,6 +1,7 @@
 // InsertWorkout.tsx
 import React, { useState } from 'react';
 import { TrainingDataFormState } from 'formState/TrainingDataFormState'; // Adjust the import path
+import ExerciseSelector from 'atom/ExerciseSelector'
 
 const InsertWorkout: React.FC = () => {
  const [workoutDetail, setWorkoutDetail] = useState(new TrainingDataFormState());
@@ -14,7 +15,6 @@ const InsertWorkout: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Replace 'your-api-endpoint' with your actual endpoint URL
     fetch('http://localhost:8080/workout-detail/put-workout', {
       method: 'POST',
       headers: {
@@ -25,24 +25,25 @@ const InsertWorkout: React.FC = () => {
     .then(response => response.json())
     .then(data => {
       console.log('Success:', data);
-      // Handle success - maybe clear form or show a success message
+      //TODO: Handle success - maybe clear form or show a success message
     })
     .catch((error) => {
       console.error('Error:', error);
-      // Handle errors here, such as displaying an error message
+      //TODO: Handle errors here, such as displaying an error message
     });
   };
+
+    const handleExerciseSelect = (selectedExerciseName: string) => {
+    setWorkoutDetail({
+      ...workoutDetail,
+      exerciseName: selectedExerciseName
+    });
+    };
 
   return (
     <form onSubmit={handleSubmit}>
 
-      <input
-        type="text"
-        name="exerciseName"
-        value={workoutDetail.exerciseName}
-        onChange={handleChange}
-        placeholder="Exercise Name"
-      />
+      <ExerciseSelector onSelect={handleExerciseSelect} />
 
       <input
         type="date"
