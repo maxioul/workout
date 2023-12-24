@@ -3,6 +3,8 @@ package dean.gymtrack.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -20,6 +22,10 @@ public class WorkoutDetail {
 
     @NonNull
     private String exerciseName;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private GymUser user;
 
     @DateTimeFormat
     @NonNull
